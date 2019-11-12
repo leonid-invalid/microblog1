@@ -1,0 +1,4 @@
+.ebextensions/
+venv/
+__pycache__/
+app.db
