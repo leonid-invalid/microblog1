@@ -1,0 +1,33 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Твитор</title>
+        {% else %}
+        <title>Твитор</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            Твитор:
+            <a href="{{ url_for('explore') }}">Поток</a>
+            <a href="{{ url_for('index') }}">Подписки</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Войти</a>
+            {% else %}
+            <a href="{{ url_for('user', username=current_user.username) }}">Мой профиль</a>
+            <a href="{{ url_for('logout') }}">Выйти</a>
+            {% endif %}
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>
